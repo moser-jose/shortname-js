@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.shortName = void 0;
 const shortName = (fullName) => {
     let nameSplit = fullName.split(' ');
     let array = ['de', 'do', 'dos', 'da', 'das', 'e'];
@@ -31,4 +32,4 @@ const shortName = (fullName) => {
         return "É Obrigatório o nome completo";
     }
 };
-exports.default = shortName;
+exports.shortName = shortName;

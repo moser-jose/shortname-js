@@ -18,7 +18,7 @@
 
 ```javascript
 
-import shortName from '@mosmmy/shortname-js'
+const {shortName} = required('@mosmmy/shortname-js')
 
 console.log(shortName('Jorge Pedro André dos Santos'))     //Jorge P. A. dos Santos
 

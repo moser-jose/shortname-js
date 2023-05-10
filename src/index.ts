@@ -1,4 +1,4 @@
-const shortName = (fullName: string) => {
+export const shortName= (fullName: string) => {
     let nameSplit: string[] = fullName.split(' ');
     let array: string[] = ['de', 'do', 'dos', 'da', 'das', 'e'];
     var penultimate: string = '';
@@ -30,4 +30,3 @@ const shortName = (fullName: string) => {
     }
     
 }
-export default shortName;

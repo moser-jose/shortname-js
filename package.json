@@ -8,7 +8,7 @@
   "files": ["src", "dist", "LICENSE", "README.md", "package.json"],
   "scripts": {
     "build": "tsc --declaration",
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify test/test.ts"
+    "dev":  "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify test/test.ts"
   },
   "keywords": [
     "shortname-js",

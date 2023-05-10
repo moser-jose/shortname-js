@@ -1,2 +1,1 @@
-declare const shortName: (fullName: string) => string;
-export default shortName;
+export declare const shortName: (fullName: string) => string;

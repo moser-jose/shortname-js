@@ -1,4 +1,4 @@
-import shortName from '../src/index';
+const {shortName} = require('../src/index');
 
 console.log(shortName("Jorge de Pedro André dos Santos"));
 
