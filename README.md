@@ -18,11 +18,11 @@
 
 ```javascript
 
-import shortName  from '@mosmmy/shortname-js'
+import shortName from '@mosmmy/shortname-js'
 
-console.log(shortName.default('Jorge Pedro André dos Santos'))     //Jorge P. A. dos Santos
+console.log(shortName('Jorge Pedro André dos Santos'))     //Jorge P. A. dos Santos
 
-console.log(shortName.default('Pedro de Sousa André'))             //Pedro S. André
+console.log(shortName('Pedro de Sousa André'))             //Pedro S. André
 ```
 
 ## Licence
