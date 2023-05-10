@@ -8,24 +8,21 @@
 
 ### yarn
 
-`yarn add shortname-js`
+`yarn add @mosmmy/shortname-js`
 
 ### NPM
 
-`npm install shortname-js`
+`npm install @mosmmy/shortname-js`
 
 ### Use
 
 ```javascript
-import shortName from 'shortname-js'
 
-//or
+import shortName  from '@mosmmy/shortname-js'
 
-const shortName = require('shortname-js')
+console.log(shortName.default('Jorge Pedro André dos Santos'))     //Jorge P. A. dos Santos
 
-console.log(shortName("Jorge Pedro André dos Santos"))     //Jorge P. A. dos Santos
-
-console.log(shortName("Pedro de Sousa André"))             //Pedro S. André
+console.log(shortName.default('Pedro de Sousa André'))             //Pedro S. André
 ```
 
 ## Licence

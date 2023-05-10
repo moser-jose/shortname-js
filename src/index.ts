@@ -1,7 +1,7 @@
 const shortName = (fullName: string) => {
     let nameSplit: string[] = fullName.split(' ');
     let array: string[] = ['de', 'do', 'dos', 'da', 'das', 'e'];
-    let penultimate: string = '';
+    var penultimate: string = '';
     if (array.includes(nameSplit[nameSplit.length - 2])) {
         penultimate = nameSplit[nameSplit.length - 2];
     }
@@ -10,7 +10,9 @@ const shortName = (fullName: string) => {
     let middleName: string = ' ';
     if (name.length > 2) {
         for (let i: number = 1; i < name.length - 1; i++) {
-            middleName += name[i][0].toUpperCase() + '. ';
+            if(name[i][0]!==undefined){
+                middleName += name[i][0].toUpperCase() + '. ';
+            }
         }
     }
     let first: string | undefined = name.shift();
@@ -23,6 +25,9 @@ const shortName = (fullName: string) => {
         return first[0].toUpperCase() + first.substring(1).toLowerCase() + middleName +
             last[0].toUpperCase() + last.substring(1).toLowerCase();
     }
+    else{
+        return "É Obrigatório o nome completo"
+    }
+    
 }
-
 export default shortName;

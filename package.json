@@ -1,10 +1,11 @@
 {
-  "name": "shortname-js",
-  "version": "1.0.0",
+  "name": "@mosmmy/shortname-js",
+  "version": "1.0.1",
   "description": "shortname-js is a JavaScript function designed to shorten names in a simple and user-friendly way. The function allows users to quickly enter full names and receive abbreviated versions of those names in return",
   "displayName": "shortname-js",
   "main" : "dist/index.js",
   "types" : "dist/index.d.ts",
+  "files": ["src", "dist", "LICENSE", "README.md", "package.json"],
   "scripts": {
     "build": "tsc --declaration",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify test/test.ts"
