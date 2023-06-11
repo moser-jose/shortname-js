@@ -26,7 +26,7 @@ export const shortName= (fullName: string) => {
             last[0].toUpperCase() + last.substring(1).toLowerCase();
     }
     else{
-        return "É Obrigatório o nome completo"
+        return "É obrigatório o nome completo"
     }
     
 }
