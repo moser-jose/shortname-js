@@ -1,6 +1,6 @@
 {
   "name": "@mosmmy/shortname-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "shortname-js is a JavaScript function designed to shorten names in a simple and user-friendly way. The function allows users to quickly enter full names and receive abbreviated versions of those names in return",
   "displayName": "shortname-js",
   "main" : "dist/index.js",

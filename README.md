@@ -1,6 +1,6 @@
 # [shortname-js](https://github.com/moser-jose/shortname-js)
 
-`shortname-js` is a JavaScript function designed to shorten names in a simple and user-friendly way. The function allows users to quickly enter full names and receive abbreviated versions of those names in return. 😅
+`shortname-js` is a JavaScript function designed to shorten names (Portuguese - PT 🇵🇹 | BR 🇧🇷 | AO 🇦🇴) in a simple and user-friendly way. The function allows users to quickly enter full names and receive abbreviated versions of those names in return. 😅
 
 [![The MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT) [![The MIT License](https://img.shields.io/github/package-json/v/moser-jose/shortname-js)](https://github.com/moser-jose/shortname-js)
 
