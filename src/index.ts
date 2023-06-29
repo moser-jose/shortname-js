@@ -10,8 +10,11 @@ export const shortName= (fullName: string) => {
     let middleName: string = ' ';
     if (name.length > 2) {
         for (let i: number = 1; i < name.length - 1; i++) {
-            if(name[i][0]!==undefined){
-                middleName += name[i][0].toUpperCase() + '. ';
+            let string: string =name[i].normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-zA-Z0-9]/g, "");
+            if(string[0]!==undefined){
+                middleName += string[0].toUpperCase() + '. ';
             }
         }
     }
@@ -25,8 +28,4 @@ export const shortName= (fullName: string) => {
         return first[0].toUpperCase() + first.substring(1).toLowerCase() + middleName +
             last[0].toUpperCase() + last.substring(1).toLowerCase();
     }
-    else{
-        return "É obrigatório o nome completo"
-    }
-    
 }
