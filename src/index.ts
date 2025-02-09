@@ -1,7 +1,7 @@
 export const shortName= (fullName: string) => {
 
     let nameSplit: string[] = fullName.split(' ').filter(Boolean);
-    
+    nameSplit=nameSplit.map(item => item.replace(/[^a-záàâãéèêíïóôõöúçA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ\s]/g, '')).filter(item => item !== '')
     let array: string[] = ['de', 'do', 'dos', 'da', 'das', 'e'];
     var penultimate: string = '';
     
@@ -15,7 +15,7 @@ export const shortName= (fullName: string) => {
             i--; 
         }
     }
-    
+
     let middleName: string = ' ';
     if (nameSplit.length > 2) {
         let integer: number = 0;
@@ -44,18 +44,15 @@ export const shortName= (fullName: string) => {
 
         if(flag) middleName +=prep+' '
     }
+
     let first: string | undefined = nameSplit.shift();
     let last: string | undefined = nameSplit.pop();
     if (first && last) {
-        first = first
-        .replace(/[^a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]/g, "")
-        last = last
-        .replace(/[^a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]/g, "")
-        
         if (penultimate) {
             return first[0].toUpperCase() + first.substring(1).toLowerCase() +
             middleName + penultimate + ' ' + last[0].toUpperCase() + last.substring(1).toLowerCase();
         }
+
         return first[0].toUpperCase() + first.substring(1).toLowerCase() + middleName +
             last[0].toUpperCase() + last.substring(1).toLowerCase();
     }

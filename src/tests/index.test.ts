@@ -24,7 +24,12 @@ describe('shortName', () => {
         expect(shortName('4MAteus Pereira dos4 Santos')).toBe('Mateus P. dos Santos');
         expect(shortName('Luiz 4de Jesus5 Mateus3 d1e Almeida3')).toBe('Luiz J. M. de Almeida');
         expect(shortName('Marciano3 3 Âng3elo e3 3 Sim3ão de 3Almeida')).toBe('Marciano A. S. de Almeida');
+        expect(shortName('Julia Ward Howe 1819-1910')).toBe('Julia W. Howe');
+        expect(shortName('1819 - 435&%$#"!*?=)(/&&%$#"~_:;.;, Julia 56.090º~-."\\,~ Ward Howe 1819-1910')).toBe('Julia W. Howe');
+    });
 
+    test('should handle characters and number in name ', () => {
+        expect(shortName('1819 - 435&%$#"!*?=)(/&&%$#"~_:;.;, Julia 56.090º~-."\\,~ Ward Howe 1819-1910')).toBe('Julia W. Howe');
     });
 
     test('should handle accented characters', () => {
@@ -38,7 +43,8 @@ describe('shortName', () => {
 
     test('should handle multiple prepositions and middle names', () => {
         expect(shortName('Ana de Maria da Silva Santos')).toBe('Ana M. S. Santos');
-        expect(shortName(' de João da   Pedro dos Santos   Silveira   ')).toBe('João P. S. Silveira');
+        expect(shortName(' João  da  4545\´<. Pedro dos Santos  João Silveira   ')).toBe('João P. S. J. Silveira');
+        expect(shortName(' de  da João  Pedro dos Santos   Silveira   ')).toBe('João P. S. Silveira');
     });
 
     test('should handle single name', () => {
