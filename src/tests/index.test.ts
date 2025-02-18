@@ -1,4 +1,4 @@
-import { shortName } from '../index';
+import shortName from '../index';
 
 describe('shortName', () => {
     test('should format simple first and last name', () => {
@@ -6,7 +6,7 @@ describe('shortName', () => {
     });
 
     test('should format name with middle name', () => {
-        expect(shortName('John James Doe')).toBe('John J. Doe');
+        expect(shortName(' John James Doe  ')).toBe('John J. Doe');
     });
 
     test('should format name with multiple middle names', () => {
@@ -48,10 +48,15 @@ describe('shortName', () => {
     });
 
     test('should handle single name', () => {
-        expect(shortName('John')).toBeUndefined();
+        expect(shortName('John')).toBe('John');
     });
 
     test('should handle empty string', () => {
         expect(shortName('')).toBeUndefined();
     });
+
+    test('should handle numbers', () => {
+        expect(shortName('343434343434')).toBeUndefined();
+    });
+
 });

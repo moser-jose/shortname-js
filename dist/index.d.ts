@@ -1,1 +1,1 @@
-export declare const shortName: (fullName: string) => string | undefined;
+export default function shortName(fullName: string): string | undefined;

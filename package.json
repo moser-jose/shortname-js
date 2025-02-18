@@ -1,6 +1,6 @@
 {
   "name": "@mosmmy/shortname-js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "shortname-js is a JavaScript function designed to shorten names in a simple and user-friendly way. The function allows users to quickly enter full names and receive abbreviated versions of those names in return",
   "displayName": "shortname-js",
   "main" : "dist/index.js",
@@ -8,8 +8,7 @@
   "files": ["src", "dist", "LICENSE", "README.md", "package.json"],
   "scripts": {
     "build": "tsc --declaration",
-    "test": "jest",
-    "prepare": "npm run build"
+    "test": "jest"
   },
   "keywords": [
     "shortname-js",

@@ -1,59 +1,65 @@
-export const shortName= (fullName: string) => {
+const PREPOSITIONS = ['de', 'do', 'dos', 'da', 'das', 'e'];
 
-    let nameSplit: string[] = fullName.split(' ').filter(Boolean);
-    nameSplit=nameSplit.map(item => item.replace(/[^a-záàâãéèêíïóôõöúçA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ\s]/g, '')).filter(item => item !== '')
-    let array: string[] = ['de', 'do', 'dos', 'da', 'das', 'e'];
-    var penultimate: string = '';
+const normalized=(name:string):string=>{
+    return name.normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z\s]/g, "");
+}
+
+const capitalizeWord = (word: string): string => {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+};
+
+export default function shortName(fullName: string):string|undefined{
+    if (!fullName?.trim()) return undefined;
     
-    if (array.includes(nameSplit[nameSplit.length - 2])) {
+    let nameSplit: string[] = fullName
+    .split(' ')
+    .filter(Boolean)
+    .map(part => part.replace(/[^a-záàâãéèêíïóôõöúçA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ\s]/g, ''))
+    .filter(part => part !== '');
+
+    let penultimate: string = '';
+    
+    if (PREPOSITIONS.includes(nameSplit[nameSplit.length - 2])) {
         penultimate = nameSplit[nameSplit.length - 2];
     }
 
-    for (let i: number = 0; i < nameSplit.length - 2; i++) {
-        if (array.includes(nameSplit[i])) {
-            nameSplit.splice(i, 1);
-            i--; 
-        }
-    }
-
+    nameSplit = nameSplit
+    .slice(0, -2)
+    .filter(word => !PREPOSITIONS.includes(word))
+    .concat(nameSplit.slice(-2));
+    
     let middleName: string = ' ';
-    if (nameSplit.length > 2) {
-        let integer: number = 0;
-        penultimate ? integer=nameSplit.length - 2 : integer=nameSplit.length - 1;
-        let prep:string =''
-        let flag:boolean=false
-        for (let i: number = 1; i < integer; i++) {
-            let string: string =nameSplit[i].normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-zA-Z\s]/g, "");
-            flag=false
-            for (let j = 0; j < array.length; j++) {
-                if(string===array[j]){
-                    prep=string
-                    flag=true
-                    break;
-                }
+
+    if (nameSplit.length === 0) return undefined;
+    if(nameSplit.length===1) return capitalizeWord(normalized(nameSplit[0]))
+    
+    else if (nameSplit.length > 2) {
+        const lastIndex = penultimate ? nameSplit.length - 2 : nameSplit.length - 1;
+        let lastPreposition = '';
+        
+        for (let i = 1; i < lastIndex; i++) {
+            const normalizedName = normalized(nameSplit[i])
+            if (PREPOSITIONS.includes(normalizedName)) {
+                lastPreposition = normalizedName;
+                continue;
             }
-            if (!flag) {
-                if (string[0]!==undefined) {
-                    middleName += string[0].toUpperCase() + '. ';
-                }
+            if (normalizedName[0]) {
+                middleName += `${normalizedName[0].toUpperCase()}. `;
             }
-            
         }
-
-        if(flag) middleName +=prep+' '
+        if (lastPreposition) {
+            middleName += `${lastPreposition} `;
+        }
     }
-
-    let first: string | undefined = nameSplit.shift();
-    let last: string | undefined = nameSplit.pop();
+    let first = capitalizeWord(nameSplit[0]);
+    let last  = capitalizeWord(nameSplit[nameSplit.length - 1]);
+    
     if (first && last) {
         if (penultimate) {
-            return first[0].toUpperCase() + first.substring(1).toLowerCase() +
-            middleName + penultimate + ' ' + last[0].toUpperCase() + last.substring(1).toLowerCase();
+            return first + middleName + penultimate + ' ' + last;
         }
-
-        return first[0].toUpperCase() + first.substring(1).toLowerCase() + middleName +
-            last[0].toUpperCase() + last.substring(1).toLowerCase();
+        return first + middleName + last;
     }
 }
