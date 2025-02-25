@@ -18,11 +18,11 @@
 
 ```javascript
 
-import shortName = '@mosmmy/shortname-js'
+import { shortName } = '@mosmmy/shortname-js'
 
 console.log(shortName('Jorge Pedro André dos Santos'))          //Jorge P. A. dos Santos
 
-console.log(shortName('Pedro de Sousa André'))                  //**Pedro** S. André
+console.log(shortName('Pedro de Sousa André'))                  //Pedro S. André
 
 console.log(shortName('Marcos Ângelo Mateus dos Santos'))       //Marcos A. M. dos Santos
 ```
