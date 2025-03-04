@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = shortName;
+exports.shortName = shortName;
 const PREPOSITIONS = ['de', 'do', 'dos', 'da', 'das', 'e'];
 const normalized = (name) => {
     return name.normalize("NFD")
