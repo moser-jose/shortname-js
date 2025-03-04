@@ -1,1 +1,1 @@
-export default function shortName(fullName: string): string | undefined;
+export declare function shortName(fullName: string): string | undefined;
