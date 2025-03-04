@@ -1,0 +1,91 @@
+name: Publish Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '>=18.0.0'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Lint
+        run: npm run lint
+
+      - name: Lint Fix
+        run: npm run lint:fix
+
+      - name: Format
+        run: npm run format
+      
+      - name: Test
+        run: npm test
+
+      - name: Test Coverage
+        run: npm run test:coverage
+        
+      - name: Check package version
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+            echo "::error::Package version ($PACKAGE_VERSION) does not match tag version ($TAG_VERSION)"
+            exit 1
+          fi
+        
+  build-and-publish-npm:
+    needs: verify
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '>=18.0.0'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+  notify:
+    needs: [build-and-publish-npm]
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Get package info
+        id: package
+        run: |
+          echo "name=$(node -p "require('./package.json').name")" >> $GITHUB_OUTPUT
+          echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+      
+      - name: Create GitHub Release Summary
+        run: |
+          echo "## :rocket: Nova versão publicada com sucesso!" >> $GITHUB_STEP_SUMMARY
+          echo "* **Pacote:** ${{ steps.package.outputs.name }}" >> $GITHUB_STEP_SUMMARY
+          echo "* **Versão:** ${{ steps.package.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "* **Publicado em:** npm e GitHub Packages" >> $GITHUB_STEP_SUMMARY
+          echo "* **Data:** $(date)" >> $GITHUB_STEP_SUMMARY 
